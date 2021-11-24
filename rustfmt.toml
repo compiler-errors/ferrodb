@@ -1,0 +1,16 @@
+use_field_init_shorthand = true
+unstable_features = true
+blank_lines_upper_bound = 1
+wrap_comments = true
+edition = "2018"
+format_strings = true
+indent_style = "Block"
+format_macro_matchers = true
+format_macro_bodies = true
+match_arm_blocks = false
+match_block_trailing_comma = true
+overflow_delimited_expr = true
+reorder_impl_items = true
+reorder_imports = true
+imports_granularity = "Module"
+group_imports = "StdExternalCrate"

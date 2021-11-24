@@ -1,0 +1,14 @@
+[package]
+name = "ferrodb"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "crates/ferrodb-page",
+    "crates/ferrodb-fs",
+    "crates/ferrodb-util",
+]
+
+[dependencies]
+ferrodb-page = { path = "crates/ferrodb-page" }

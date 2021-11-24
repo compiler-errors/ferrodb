@@ -1,0 +1,12 @@
+[package]
+name = "ferrodb-page"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ferrodb-util = { path = "../ferrodb-util" }
+linked-hash-map = "0.5.4"
+maplit = "1.0.2"
+parking_lot = "0.11.2"
+rand = "0.8.4"
+thiserror = "1.0.30"
