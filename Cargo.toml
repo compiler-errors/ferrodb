@@ -8,7 +8,15 @@ members = [
     "crates/ferrodb-page",
     "crates/ferrodb-fs",
     "crates/ferrodb-util",
+    "crates/ferrodb-protocol",
+    "crates/ferrodb-client",
+    "crates/ferrodb-server",
 ]
 
 [dependencies]
-ferrodb-page = { path = "crates/ferrodb-page" }
+anyhow = "1.0.51"
+ferrodb-client = { path = "crates/ferrodb-client" }
+ferrodb-protocol = { path = "crates/ferrodb-protocol" }
+ferrodb-server = { path = "crates/ferrodb-server" }
+ferrodb-util = { path = "crates/ferrodb-util" }
+structopt = "0.3.25"

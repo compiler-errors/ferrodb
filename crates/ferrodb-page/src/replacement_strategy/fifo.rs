@@ -38,11 +38,11 @@ impl ReplacementStrategy for FifoReplacementStrategy {
         self.pages.lock().push_back(id);
     }
 
-    fn read(&self, id: PageId) {
+    fn read(&self, _id: PageId) {
         // Do nothing, we don't care about reads
     }
 
-    fn write(&self, id: PageId) {
+    fn write(&self, _id: PageId) {
         // Do nothing, we don't care about writes
     }
 }

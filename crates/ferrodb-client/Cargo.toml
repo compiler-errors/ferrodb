@@ -1,9 +1,12 @@
 [package]
-name = "ferrodb-util"
+name = "ferrodb-client"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-paste = "1.0.6"
+anyhow = "1.0.51"
+ferrodb-protocol = { path = "../ferrodb-protocol" }
+erased-serde = "0.3.16"
+serde = "1.0.130"

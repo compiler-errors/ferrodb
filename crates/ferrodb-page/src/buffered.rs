@@ -9,7 +9,6 @@ use crate::{PageHandle, PageId, PageManager, PageRef};
 struct BufferedPageManager<R> {
     pages: Mutex<HashMap<PageId, Page>>,
     strat: R,
-    page_size: usize,
     limit: usize,
 }
 
@@ -17,11 +16,10 @@ impl<R> BufferedPageManager<R>
 where
     R: ReplacementStrategy,
 {
-    fn new(page_size: usize, limit: usize) -> Self {
+    fn new(limit: usize) -> Self {
         BufferedPageManager {
             pages: Mutex::default(),
             strat: R::new(limit),
-            page_size,
             limit,
         }
     }
@@ -35,7 +33,7 @@ where
         let mut pages = self.pages.lock();
 
         let (page, page_handle, page_ref) = if pages.len() < self.limit {
-            Page::allocate_with_size(self.page_size, &self.strat)
+            Page::allocate_with_size(crate::page_size(), &self.strat)
         } else {
             let mut invalidated = None;
 

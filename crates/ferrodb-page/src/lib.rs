@@ -14,6 +14,8 @@ pub use self::replacement_strategy::NoPages;
 static PAGE_MANAGER: SyncOnceCell<Box<dyn PageManager + Send + Sync + 'static>> =
     SyncOnceCell::new();
 
+static PAGE_SIZE: SyncOnceCell<usize> = SyncOnceCell::new();
+
 trait PageManager {
     fn allocate(&'static self) -> Result<(PageHandle, PageRef), NoPages>;
 }
@@ -23,4 +25,10 @@ pub fn allocate_page() -> Result<(PageHandle, PageRef), NoPages> {
         .get()
         .expect("Expected Page Manager to be setup during database startup")
         .allocate()
+}
+
+pub fn page_size() -> usize {
+    *PAGE_SIZE
+        .get()
+        .expect("Expected Page size to be setup during database startup")
 }

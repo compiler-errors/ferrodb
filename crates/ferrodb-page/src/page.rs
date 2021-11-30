@@ -12,8 +12,6 @@ use crate::replacement_strategy::ReplacementStrategy;
 
 id_type!(pub PageId);
 
-static ID: AtomicUsize = AtomicUsize::new(0);
-
 pub(crate) struct Page {
     pub id: PageId,
     inner: NonNull<PageInner>,
@@ -46,7 +44,7 @@ impl Page {
         }))
         .into();
 
-        let id = PageId(ID.fetch_add(1, Ordering::SeqCst));
+        let id = PageId::new();
 
         (
             Page { id, inner },
