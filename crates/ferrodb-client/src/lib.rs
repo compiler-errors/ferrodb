@@ -2,7 +2,7 @@ use std::io::{Read, Write};
 use std::thread::JoinHandle;
 
 use anyhow::Result;
-use ferrodb_protocol::{Ping, Pong, Transport, PROTOCOL_VERSION};
+use ferrodb_protocol::{Ping, Pong, Transport, PROTOCOL_VERSION, PREAMBLE};
 
 pub fn spawn_client<C>(conn: C, transport: Transport) -> JoinHandle<Result<()>>
 where
@@ -15,7 +15,7 @@ fn client<C>(mut conn: C, transport: Transport) -> Result<()>
 where
     C: Read + Write,
 {
-    write!(conn, "HELLO FERRODB {transport}\n")?;
+    write!(conn, "{}{transport}.\n", PREAMBLE)?;
 
     let mut stream = transport.stream(conn);
 
@@ -25,5 +25,6 @@ where
 
     let pong: Pong = stream.read()?;
 
+    println!("ok.");
     Ok(())
 }

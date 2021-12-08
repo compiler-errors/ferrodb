@@ -5,7 +5,7 @@ use std::str::FromStr;
 use std::thread::JoinHandle;
 
 use anyhow::{anyhow, bail, Result};
-use ferrodb_protocol::{Ping, Pong, Transport, PROTOCOL_VERSION};
+use ferrodb_protocol::{Ping, Pong, Transport, PROTOCOL_VERSION, PREAMBLE};
 
 pub fn spawn_server_loop(port: u16) -> JoinHandle<Result<()>> {
     todo!()
@@ -26,8 +26,8 @@ where
 
     let kind = hello_line
         .trim()
-        .strip_prefix("HELLO FERRODB ")
-        .ok_or_else(|| anyhow!("Expected HELLO FERRODB preamble, got: {hello_line}"))?;
+        .strip_prefix(PREAMBLE)
+        .ok_or_else(|| anyhow!("Expected `{}` preamble, got: {hello_line}", PREAMBLE))?;
     let transport = Transport::from_str(kind).map_err(anyhow::Error::msg)?;
 
     let mut stream = transport.stream(&mut conn);
@@ -45,6 +45,7 @@ where
         );
     }
 
+    println!("ok.");
     Ok(())
 }
 
